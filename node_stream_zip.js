@@ -7,7 +7,7 @@
 
 var
     util = require('util'),
-    fs = require('fs'),
+    fs = require('fs-extra'),
     path = require('path'),
     events = require('events'),
     zlib = require('zlib'),
@@ -413,7 +413,7 @@ var StreamZip = function(config) {
             return callback();
         var dir = dirs.shift();
         dir = path.join(baseDir, path.join.apply(path, dir));
-        fs.mkdir(dir, function(err) {
+        fs.mkdirs(dir, function(err) {
             if (err && err.code !== 'EEXIST')
                 return callback(err);
             createDirectories(baseDir, dirs, callback);
